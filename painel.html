@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Gestor | ClickAgro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="glow-point p1"></div>
+        <div class="glow-point p2" style="background: var(--cursor-yellow);"></div>
+    </div>
+
+    <section id="login-screen">
+        <div class="glass-panel">
+            <div class="brand-logo">
+                <span class="text-dark-green">CLICK</span>
+                <span class="text-light-green">GESTOR</span>
+            </div>
+            <p class="subtitle">Acesso Exclusivo: Gestão de Conteúdo</p>
+            <form id="admin-login-form">
+                <input type="text" id="admin-user" placeholder="Usuário" required style="margin-bottom:10px">
+                <input type="password" id="admin-pass" placeholder="Senha" required style="margin-bottom:10px">
+                <button type="submit" class="btn-primary">ENTRAR</button>
+            </form>
+        </div>
+    </section>
+
+    <main id="admin-dashboard" class="hidden">
+        <nav class="glass-nav">
+            <div class="brand-logo-small">
+                <span class="text-white">CLICK</span><span class="text-light-green">GESTOR</span>
+            </div>
+            <button onclick="location.reload()" style="color:white; background:none; border:none; cursor:pointer">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </button>
+        </nav>
+
+        <div class="container" style="padding-top: 2rem;">
+            <header class="hero-section">
+                <h1>Gerenciador de Arquivos</h1>
+                <p>Envie fotos, vídeos, áudios e PDFs para os técnicos.</p>
+            </header>
+
+            <div class="glass-panel" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <h3 style="margin-bottom: 20px; color: var(--cursor-yellow);">
+                    <i class="fas fa-cloud-upload-alt"></i> <span id="form-title">Novo Material</span>
+                </h3>
+                
+                <form id="upload-form">
+                    <input type="hidden" id="content-id">
+
+                    <label>Título:</label>
+                    <input type="text" id="content-title" placeholder="Ex: Cartilha de Pragas" required>
+
+                    <label>Tipo:</label>
+                    <select id="content-type">
+                        <option value="video">🎥 Vídeo</option>
+                        <option value="audio">🎙️ Áudio</option>
+                        <option value="pdf">📄 Documento/PDF</option>
+                        <option value="img">🖼️ Imagem/Foto</option>
+                    </select>
+
+                    <label>Arquivo (Deixe em branco para manter o atual):</label>
+                    <input type="file" id="content-file" style="padding:10px; background:rgba(255,255,255,0.1); border-radius:10px; margin-bottom:15px; width:100%">
+                    
+                    <label>Mensagem Padrão (WhatsApp):</label>
+                    <textarea id="content-msg" rows="2" placeholder="Ex: Baixe este material importante..." required></textarea>
+
+                    <div style="display:flex; gap:10px">
+                        <button type="submit" class="btn-primary" id="btn-submit">
+                            <i class="fas fa-save"></i> SALVAR ARQUIVO
+                        </button>
+                        
+                        <button type="button" id="btn-cancel" onclick="resetForm()" class="btn-primary" style="background:#ff5555; display:none;">
+                            CANCELAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="max-width: 800px; margin: 30px auto;">
+                <h3 style="color: white; margin-bottom: 15px;">Materiais Disponíveis</h3>
+                <div id="admin-content-list"></div>
+            </div>
+        </div>
+    </main>
+    <script src="painel.js"></script>
+</body>
+</html>

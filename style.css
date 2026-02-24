@@ -1,0 +1,289 @@
+/* style.css - Versão Final Completa */
+
+:root {
+    /* Identidade Visual ClickAgro */
+    --click-dark: #00442b;
+    --agro-green: #4caf50;
+    --cursor-yellow: #ffb300;
+    --cursor-hover: #ffca28;
+    
+    /* Ambiente */
+    --bg-dark: #051e11;
+    --glass-bg: rgba(0, 30, 15, 0.85); /* Fundo sólido para leitura */
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-white: #f1f1f1;
+    --text-muted: #aaaaaa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top right, #0a3d25, var(--bg-dark));
+    color: var(--text-white);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- FUNDO (Animação de Luz) --- */
+.background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.glow-point {
+    position: absolute;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: pulse 8s infinite alternate;
+}
+
+.p1 { background: var(--agro-green); top: -10%; left: -10%; }
+.p2 { background: var(--cursor-yellow); bottom: -10%; right: -10%; animation-delay: 2s; }
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(1.1); opacity: 0.4; }
+}
+
+/* --- CLASSES DE VIDRO (GLASSMORPHISM) --- */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    color: var(--text-white);
+}
+
+/* --- TELA DE LOGIN --- */
+#login-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+/* Especificidade: Painel APENAS do Login deve ser pequeno */
+#login-screen .glass-panel {
+    width: 450px;
+    max-width: 100%;
+    padding: 3rem;
+    text-align: center;
+}
+
+.brand-logo { font-size: 3rem; margin-bottom: 5px; white-space: nowrap; }
+.text-dark-green { color: #fff; font-weight: 800; }
+.text-light-green { color: var(--agro-green); font-weight: 800; }
+.cursor-icon { color: var(--cursor-yellow); font-size: 0.8em; transform: rotate(-20deg); }
+.subtitle { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+
+/* Inputs e Botões */
+.input-group { position: relative; margin-bottom: 1.2rem; text-align: left; }
+.input-group i {
+    position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+    color: var(--agro-green);
+}
+
+input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+input:focus { border-color: var(--agro-green); background: rgba(0, 0, 0, 0.3); }
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--cursor-yellow);
+    color: var(--click-dark);
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
+    margin-top: 10px;
+}
+.btn-primary:hover {
+    background: var(--cursor-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 179, 0, 0.4);
+}
+
+/* --- DASHBOARD --- */
+.hidden { display: none !important; }
+
+.glass-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5%;
+    background: rgba(5, 30, 17, 0.95);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky; top: 0; z-index: 50;
+}
+
+.brand-logo-small { font-size: 1.5rem; font-weight: 800; }
+.user-profile { display: flex; align-items: center; gap: 15px; font-size: 0.9rem; }
+.avatar-circle {
+    width: 35px; height: 35px; background: var(--agro-green);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+}
+#logout-btn { background: none; border: none; color: #ff5555; font-size: 1.1rem; cursor: pointer; }
+
+.container { 
+    max-width: 1200px; margin: 0 auto; 
+    padding: 2rem 5%; padding-bottom: 80px; 
+}
+
+.hero-section { text-align: center; margin-bottom: 3rem; animation: fadeIn 1s; }
+.hero-section h1 { font-size: 2.5rem; color: var(--text-white); }
+.hero-section p { color: var(--text-muted); }
+
+/* Grid de Cards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.card:hover { 
+    background: rgba(255, 255, 255, 0.08); 
+    transform: translateY(-5px); 
+    border-color: var(--agro-green); 
+}
+.card-icon { font-size: 2.5rem; color: var(--agro-green); margin-bottom: 1rem; }
+.card:hover .card-icon { color: var(--cursor-yellow); }
+
+.highlight-card { border: 1px solid rgba(255, 179, 0, 0.5); }
+
+/* Painel de Conteúdo Expansível */
+.hidden-panel { display: none; }
+.content-panel {
+    margin-top: 2rem;
+    background: rgba(0, 30, 15, 0.95);
+    border: 1px solid var(--agro-green);
+    border-radius: 15px;
+    padding: 2rem;
+    animation: slideUp 0.5s;
+}
+.panel-header { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 1rem;}
+.close-btn { background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; }
+ul li { list-style: none; margin-bottom: 10px; display: flex; gap: 10px; }
+ul li i { color: var(--cursor-yellow); margin-top: 4px; }
+
+/* --- NOVOS ESTILOS: FERRAMENTAS DIGITAIS --- */
+
+/* Inputs Especiais */
+textarea, select {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 15px;
+    resize: vertical;
+}
+textarea:focus, select:focus { border-color: var(--agro-green); background: rgba(0, 0, 0, 0.4); }
+
+/* Checkboxes */
+.checkbox-group {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;
+}
+.custom-check {
+    display: flex; align-items: center; gap: 10px; padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px; cursor: pointer; transition: 0.3s;
+}
+.custom-check:hover { background: rgba(255, 255, 255, 0.1); }
+.custom-check input { width: auto; margin: 0; }
+
+/* Botão WhatsApp */
+.btn-whatsapp {
+    background: #25D366; color: white; border: none;
+    padding: 8px 15px; border-radius: 20px;
+    cursor: pointer; font-weight: bold;
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.9rem; margin-top: 5px;
+}
+.btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
+
+/* Itens Salvos (Diário/Agenda) */
+.saved-item {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--cursor-yellow);
+    padding: 15px; margin-bottom: 10px;
+    border-radius: 8px; position: relative;
+    animation: fadeIn 0.5s;
+}
+.saved-item h4 { color: var(--agro-green); margin-bottom: 5px; }
+.saved-item small { color: #888; display: block; margin-top: 5px; }
+.delete-btn {
+    position: absolute; top: 10px; right: 10px;
+    color: #ff5555; background: none; border: none; cursor: pointer;
+}
+
+/* Recomendação */
+#recommendation-box {
+    margin-top: 20px; padding: 15px;
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid var(--agro-green);
+    border-radius: 10px; display: none;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 600px) {
+    /* Login Mobile */
+    #login-screen .glass-panel { width: 100%; padding: 2rem 1.5rem; }
+    
+    .brand-logo { font-size: 2.2rem; }
+    .hero-section h1 { font-size: 1.8rem; }
+    
+    /* Layout Mobile */
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .card { display: flex; align-items: center; text-align: left; gap: 15px; padding: 1.5rem; }
+    .card-icon { margin-bottom: 0; font-size: 2rem; }
+    
+    /* Outros */
+    .user-profile span { display: none; }
+    .checkbox-group { grid-template-columns: 1fr; } /* Checkbox um embaixo do outro */
+}
+
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+@keyframes slideUp { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }

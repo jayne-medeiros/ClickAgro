@@ -1,0 +1,14 @@
+# ClickAgro .gitignore
+
+# Local Data
+conteudos.json
+uploads/
+
+# OS Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log

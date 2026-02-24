@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickAgro | Plataforma ATeG</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background">
+        <div class="glow-point p1"></div>
+        <div class="glow-point p2"></div>
+    </div>
+
+    <section id="login-screen">
+        <div class="glass-panel">
+            <div class="login-content">
+                <div class="brand-logo">
+                    <span class="text-dark-green">CLICK</span>
+                    <span class="text-light-green">AGRO</span>
+                    <i class="fas fa-mouse-pointer cursor-icon"></i>
+                </div>
+                
+                <p class="subtitle">Acesso Restrito: ATeG e Coordenação</p>
+                
+                <form id="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="user-id" placeholder="ID do Técnico" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="user-pass" placeholder="Senha" required>
+                    </div>
+                    <button type="submit" class="btn-primary">ACESSAR PLATAFORMA</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <main id="dashboard" class="hidden">
+        <nav class="glass-nav">
+            <div class="brand-logo-small">
+                <span class="text-white">CLICK</span><span class="text-light-green">AGRO</span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar-circle">JK</div>
+                <span>Jayne Karla (Admin)</span>
+                <button id="logout-btn"><i class="fas fa-power-off"></i></button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <header class="hero-section">
+                <h1>Painel do Facilitador</h1>
+                <p>Acompanhe seu progresso e agende visitas.</p>
+            </header>
+
+            <section class="glass-panel" style="margin-bottom: 30px; text-align: left; max-width: 100%;">
+                <h3 style="margin-bottom: 15px; color: var(--cursor-yellow);"><i class="fas fa-trophy"></i> Meus Critérios de Sucesso</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>Produtores Alcançados</span>
+                        <span id="meta-produtores">0/50</span>
+                    </div>
+                    <div style="width:100%; background: rgba(255,255,255,0.1); border-radius:10px; height:10px;">
+                        <div id="bar-produtores" style="width:0%; background: var(--agro-green); height:100%; border-radius:10px; transition: 1s;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                        <span>Microinovações Registradas</span>
+                        <span id="meta-inovacoes">0/10</span>
+                    </div>
+                    <div style="width:100%; background: rgba(255,255,255,0.1); border-radius:10px; height:10px;">
+                        <div id="bar-inovacoes" style="width:0%; background: var(--cursor-yellow); height:100%; border-radius:10px; transition: 1s;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid">
+                <div class="card" onclick="openSection('fase1')">
+                    <div class="card-icon"><i class="fas fa-search-location"></i></div>
+                    <h3>1. Diagnóstico</h3>
+                </div>
+
+                <div class="card" onclick="openSection('fase2')">
+                    <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3>2. Envios</h3>
+                </div>
+
+                <div class="card" onclick="openSection('fase3')">
+                    <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h3>3. Diário</h3>
+                </div>
+                
+                <div class="card" onclick="openSection('agenda')">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Agenda</h3>
+                </div>
+
+                <div class="card highlight-card" onclick="openSection('materiais')">
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Inovações</h3>
+                </div>
+                
+                <div class="card" onclick="openSection('avaliacao')">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Avaliação Mensal</h3>
+                </div>
+            </div>
+
+            <section id="content-display" class="content-panel hidden-panel">
+                <div class="panel-header">
+                    <h2 id="panel-title">Título</h2>
+                    <button onclick="closePanel()" class="close-btn"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="panel-body">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+    // SENSOR LUMIÔ - Contabiliza acesso
+    // Mude o nome abaixo para o nome EXATO da tecnologia deste site
+    const nomeDestaTecnologia = "clickagro"; 
+
+    fetch(`https://hlumio.com/tracker.php?tech=${encodeURIComponent(nomeDestaTecnologia)}`)
+        .then(response => console.log("Acesso contabilizado no Hub."))
+        .catch(error => console.error("Erro na telemetria."));
+</script>
+<script>
+    // SENSOR LUMIÔ - Contabiliza acesso
+    // Mude o nome abaixo para o nome EXATO da tecnologia deste site
+    const nomeDestaTecnologia = "Click Agro"; 
+
+    fetch(`https://hlumio.com/tracker.php?tech=${encodeURIComponent(nomeDestaTecnologia)}`)
+        .then(response => console.log("Acesso contabilizado no Hub."))
+        .catch(error => console.error("Erro na telemetria."));
+</script>
+</body>
+</html>
